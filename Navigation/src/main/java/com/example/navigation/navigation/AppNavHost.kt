@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.presentation.screens.addflashcard.AddFlashCardScreen
-import com.example.presentation.screens.flashcardlist.FlashCardListScreen
+import com.example.presentation.screens.flashcardrevision.FlashCardRevisionScreen
 import com.example.presentation.screens.home.HomeScreen
 
 @Composable
@@ -36,8 +36,8 @@ fun AppNavHost(
         composable<AppRoute.AddFlashCard> {
             AddFlashCardScreen()
         }
-        composable<AppRoute.FlashCardList> {
-            FlashCardListScreen()
+        composable<AppRoute.FlashCardRevision> {
+            FlashCardRevisionScreen()
         }
     }
 }

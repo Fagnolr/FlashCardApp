@@ -23,3 +23,6 @@ rootProject.name = "FlashCard"
 include(":app")
 include(":Navigation")
 include(":Presentation")
+include(":Persistence")
+include(":Domain")
+include(":Data")

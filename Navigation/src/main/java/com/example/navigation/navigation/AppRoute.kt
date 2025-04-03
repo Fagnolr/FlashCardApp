@@ -11,5 +11,5 @@ interface AppRoute {
     object AddFlashCard : AppRoute
 
     @Serializable
-    object FlashCardList : AppRoute
+    object FlashCardRevision : AppRoute
 }

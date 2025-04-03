@@ -1,7 +1,7 @@
 [versions]
 agp = "8.8.2"
 hiltCompose = "1.2.0"
-kotlin = "2.1.20"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -16,6 +16,9 @@ material3Android = "1.3.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 foundationAndroid = "1.7.8"
+room = "2.6.1"
+kspVersion = "2.1.0-1.0.29"
+kotlinxCollectionsImmutable = "0.3.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +44,10 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

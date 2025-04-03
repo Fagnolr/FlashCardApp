@@ -1,6 +1,5 @@
 package com.example.navigation.navigation
 
-import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
@@ -43,7 +42,7 @@ fun BottomNavigationBar(
         NavigationItem(
             title = stringResource(R.string.appbar_list),
             icon = Icons.AutoMirrored.Filled.List,
-            route = AppRoute.FlashCardList,
+            route = AppRoute.FlashCardRevision,
         ),
     )
 
