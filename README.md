@@ -17,3 +17,12 @@ A simple and intuitive flashcard application built with Kotlin for Android. This
 - **Room Database**: Local database for storing flashcards.
 - **Coroutines**: For asynchronous task handling.
 - **Hilt**: For dependency injection, simplifying the management of objects and dependencies.
+
+## Project Structure
+
+- **app**: Main Android application module.
+- **data**: Contains data models and repository classes.
+- **domain**: Includes business logic and use cases.
+- **presentation**: Handles UI components and ViewModels.
+- **persistence**: Includes database-related files and Room DAOs.
+
