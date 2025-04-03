@@ -16,10 +16,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.presentation.R
 import com.example.presentation.screens.home.FlashCardItem
 
 @Composable
@@ -37,14 +39,18 @@ fun FlashCardRevisionScreen(
 
         is FlashCardRevisionUiState.Empty -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Aucune flashcard disponible", style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    stringResource(R.string.no_flashcard_to_display),
+                    style = MaterialTheme.typography.bodyLarge
+                )
             }
         }
 
         is FlashCardRevisionUiState.Success -> {
+            val successState = state as FlashCardRevisionUiState.Success
             FlashCardRevisionContent(
-                flashCard = (state as FlashCardRevisionUiState.Success).flashCard,
-                showAnswer = (state as FlashCardRevisionUiState.Success).showAnswer,
+                flashCard = successState.flashCard,
+                showAnswer = successState.showAnswer,
                 onRevealAnswer = { viewModel.revealAnswer() },
                 onNextCard = { viewModel.showNextFlashCard() }
             )
@@ -52,7 +58,12 @@ fun FlashCardRevisionScreen(
 
         is FlashCardRevisionUiState.Error -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("Erreur : ${(state as FlashCardRevisionUiState.Error).message}", color = Color.Red)
+                Text(
+                    stringResource(
+                        R.string.error_with_argument,
+                        (state as FlashCardRevisionUiState.Error).message
+                    ), color = Color.Red
+                )
             }
         }
     }
@@ -73,7 +84,7 @@ fun FlashCardRevisionContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Question : ${flashCard.question}",
+            text = stringResource(R.string.question_with_argument, flashCard.question),
             style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -81,21 +92,21 @@ fun FlashCardRevisionContent(
 
         if (showAnswer) {
             Text(
-                text = "Réponse : ${flashCard.answer}",
+                text = stringResource(R.string.answer_with_argument, flashCard.answer),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
         } else {
             Button(onClick = onRevealAnswer) {
-                Text("Afficher la réponse")
+                Text(stringResource(R.string.display_answer))
             }
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(onClick = onNextCard) {
-            Text("Carte suivante")
+            Text(stringResource(R.string.next_flashcard))
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -31,7 +32,7 @@ fun BottomNavigationBar(
     val navigationItems = listOf(
         NavigationItem(
             title = stringResource(R.string.appbar_home),
-            icon = Icons.Default.Home,
+            icon = Icons.AutoMirrored.Filled.List,
             route = AppRoute.Home,
         ),
         NavigationItem(
@@ -40,8 +41,8 @@ fun BottomNavigationBar(
             route = AppRoute.AddFlashCard,
         ),
         NavigationItem(
-            title = stringResource(R.string.appbar_list),
-            icon = Icons.AutoMirrored.Filled.List,
+            title = stringResource(R.string.appbar_revision),
+            icon = Icons.Default.Refresh,
             route = AppRoute.FlashCardRevision,
         ),
     )

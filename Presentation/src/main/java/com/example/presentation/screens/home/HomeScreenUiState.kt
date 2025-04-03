@@ -8,7 +8,7 @@ interface HomeScreenUiState {
         val flashCards: PersistentList<FlashCardItem>
     ) : HomeScreenUiState
 
-    data class Error(val message: Throwable) : HomeScreenUiState
+    data class Error(val message: String) : HomeScreenUiState
 }
 
 data class FlashCardItem(

@@ -13,19 +13,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.presentation.R
 import kotlinx.coroutines.delay
 
 @Composable
@@ -47,7 +45,7 @@ fun AddFlashCardScreen(
         OutlinedTextField(
             value = question,
             onValueChange = viewModel::onQuestionChanged,
-            label = { Text("Question") },
+            label = { Text(stringResource(R.string.question)) },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -56,7 +54,7 @@ fun AddFlashCardScreen(
         OutlinedTextField(
             value = answer,
             onValueChange = viewModel::onAnswerChanged,
-            label = { Text("Réponse") },
+            label = { Text(stringResource(R.string.answer)) },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -67,7 +65,7 @@ fun AddFlashCardScreen(
             modifier = Modifier.fillMaxWidth(),
             enabled = question.isNotBlank() && answer.isNotBlank()
         ) {
-            Text("Ajouter la carte")
+            Text(stringResource(R.string.add_flash_card_button))
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -77,29 +75,34 @@ fun AddFlashCardScreen(
             enter = fadeIn() + slideInVertically(initialOffsetY = { it / 2 }),
             exit = fadeOut() + slideOutVertically(targetOffsetY = { it / 2 })
         ) {
-            when (addState) {
-                is AddFlashCardUiState.Error -> {
-                    Text(
-                        text = (addState as AddFlashCardUiState.Error).message,
-                        color = Color.Red,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                }
-
-                is AddFlashCardUiState.Success -> {
-                    Text(
-                        text = "Carte ajoutée avec succès !",
-                        color = Color.Green,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-                }
-
-                else -> Unit
-            }
+            FlashCardStateMessage(addState)
         }
 
         if (addState is AddFlashCardUiState.Loading) {
             CircularProgressIndicator(modifier = Modifier.padding(top = 8.dp))
         }
+    }
+}
+
+@Composable
+fun FlashCardStateMessage(state: AddFlashCardUiState) {
+    when (state) {
+        is AddFlashCardUiState.Success -> {
+            Text(
+                text = stringResource(R.string.add_flash_card_success),
+                color = Color.Green,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
+
+        is AddFlashCardUiState.Error -> {
+            Text(
+                text = state.message,
+                color = Color.Red,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
+
+        else -> Unit
     }
 }

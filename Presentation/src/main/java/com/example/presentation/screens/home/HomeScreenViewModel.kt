@@ -32,7 +32,7 @@ class HomeScreenViewModel @Inject constructor(
                     )
                 },
                 onFailure = { error ->
-                    HomeScreenUiState.Error(error)
+                    HomeScreenUiState.Error(error.localizedMessage.orEmpty())
                 }
             )
         }
@@ -48,7 +48,7 @@ class HomeScreenViewModel @Inject constructor(
             try {
                 removeFlashCardUseCase(flashCardItem.toFlashCardModel())
             } catch (e: Exception) {
-                Log.d("dede", e.message.orEmpty())
+                Log.d("dede", e.message.orEmpty()) //TODO CHANGER ICI
             }
         }
     }

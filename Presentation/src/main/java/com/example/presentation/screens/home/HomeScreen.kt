@@ -2,6 +2,7 @@ package com.example.presentation.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,9 +27,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.presentation.R
 import kotlinx.collections.immutable.PersistentList
 
 @Composable
@@ -59,7 +62,7 @@ fun HomeContent(
         }
 
         is HomeScreenUiState.Error -> {
-            Text("Error")
+            Text(stringResource(R.string.error_with_argument, state.message))
         }
     }
 }
@@ -71,7 +74,12 @@ fun FlashCardList(
     modifier: Modifier = Modifier,
 ) {
     if (flashCards.isEmpty()) {
-        Text("EMPTY LIST")
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(stringResource(R.string.no_flashcard_available))
+        }
     } else {
         LazyColumn {
             items(
@@ -91,6 +99,7 @@ fun FlashCard(
     modifier: Modifier = Modifier,
 ) {
     val dismissState = rememberSwipeToDismissBoxState(
+        positionalThreshold = { totalDistance -> totalDistance * 0.3f },
         confirmValueChange = {
             if (it == SwipeToDismissBoxValue.EndToStart) {
                 viewModel.deleteFlashCard(flashCardItem)
@@ -105,21 +114,19 @@ fun FlashCard(
         state = dismissState,
         enableDismissFromStartToEnd = false,
         backgroundContent = {
-            if (dismissState.targetValue == SwipeToDismissBoxValue.EndToStart) {
-                Row(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxSize()
-                        .background(Color.Red, shape = RoundedCornerShape(12.dp)),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    Icon(
-                        Icons.Default.Delete,
-                        contentDescription = "delete",
-                        modifier = Modifier.padding(end = 12.dp)
-                    )
-                }
+            Row(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxSize()
+                    .background(Color.Red, shape = RoundedCornerShape(14.dp)),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                Icon(
+                    Icons.Default.Delete,
+                    contentDescription = "delete",
+                    modifier = Modifier.padding(end = 12.dp)
+                )
             }
         }
     ) {
@@ -133,13 +140,13 @@ fun FlashCard(
         ) {
             Column {
                 Text(
-                    text = "Question : ${flashCardItem.question}",
+                    text = stringResource(R.string.question_with_argument, flashCardItem.question),
                     modifier = Modifier
                         .padding(16.dp),
                 )
                 HorizontalDivider(thickness = 1.dp)
                 Text(
-                    text = "Réponse : ${flashCardItem.answer}",
+                    text = stringResource(R.string.answer_with_argument, flashCardItem.answer),
                     modifier = Modifier
                         .padding(16.dp),
                 )

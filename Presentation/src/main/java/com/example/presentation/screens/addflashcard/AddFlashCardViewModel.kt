@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.io.IOException
 import java.util.UUID
 import javax.inject.Inject
 
@@ -58,13 +57,8 @@ class AddFlashCardViewModel @Inject constructor(
                     AddFlashCardUiState.Success
 
                 },
-                onFailure = {
-                    val errorMessage = when (it) {
-                        is IOException -> "Problème de connexion Internet"
-                        is IllegalArgumentException -> "Données invalides"
-                        else -> it.message ?: "Une erreur inconnue est survenue"
-                    }
-                    AddFlashCardUiState.Error(errorMessage)
+                onFailure = { exception ->
+                    AddFlashCardUiState.Error(exception.localizedMessage.orEmpty())
                 }
             )
         }

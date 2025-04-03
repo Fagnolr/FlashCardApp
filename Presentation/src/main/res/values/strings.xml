@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="question">Question</string>
+    <string name="answer">Réponse</string>
+    <string name="add_flash_card_button">Ajouter la carte</string>
+    <string name="add_flash_card_success">Carte ajoutée avec succès !</string>
+    <string name="display_answer">Afficher la réponse</string>
+    <string name="next_flashcard">Carte suivante</string>
+    <string name="no_flashcard_to_display">Aucune flashcard disponible</string>
+    <string name="error_with_argument">Erreur : %1$s</string>
+    <string name="answer_with_argument">Réponse : %1$s</string>
+    <string name="no_flashcard_available">Aucune flash card ajoutée</string>
+    <string name="question_with_argument">Question : %1$s</string>
+</resources>

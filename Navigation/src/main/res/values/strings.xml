@@ -1,5 +1,5 @@
 <resources>
-    <string name="appbar_home">Réviser</string>
+    <string name="appbar_home">Liste</string>
     <string name="appbar_add">Ajouter</string>
-    <string name="appbar_list">Liste</string>
+    <string name="appbar_revision">Réviser</string>
 </resources>

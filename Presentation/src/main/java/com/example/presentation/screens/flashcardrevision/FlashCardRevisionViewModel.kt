@@ -16,7 +16,8 @@ class FlashCardRevisionViewModel @Inject constructor(
     private val getFlashCardsUseCase: GetFlashCardsUseCase,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<FlashCardRevisionUiState>(FlashCardRevisionUiState.Loading)
+    private val _state =
+        MutableStateFlow<FlashCardRevisionUiState>(FlashCardRevisionUiState.Loading)
     val state: StateFlow<FlashCardRevisionUiState> = _state
 
     private var flashCards: List<FlashCardItem> = emptyList()
@@ -33,7 +34,7 @@ class FlashCardRevisionViewModel @Inject constructor(
                     flashCards = cards.map { it.toFlashCardItem() }.shuffled()
                     showNextFlashCard()
                 }.onFailure {
-                    _state.value = FlashCardRevisionUiState.Error("Erreur lors du chargement")
+                    _state.value = FlashCardRevisionUiState.Error(it.localizedMessage.orEmpty())
                 }
             }
         }
@@ -42,7 +43,8 @@ class FlashCardRevisionViewModel @Inject constructor(
     fun showNextFlashCard() {
         if (flashCards.isNotEmpty()) {
             currentIndex = (flashCards.indices - currentIndex).randomOrNull()
-            _state.value = FlashCardRevisionUiState.Success(flashCards[currentIndex ?: 0], showAnswer = false)
+            _state.value =
+                FlashCardRevisionUiState.Success(flashCards[currentIndex ?: 0], showAnswer = false)
         } else {
             _state.value = FlashCardRevisionUiState.Empty
         }
