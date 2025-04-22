@@ -22,6 +22,7 @@ class FlashCardRevisionViewModel @Inject constructor(
 
     private var flashCards: List<FlashCardItem> = emptyList()
     private var currentIndex: Int? = null
+    private val seenIndices = mutableSetOf<Int>()
 
     init {
         loadFlashCards()
@@ -41,12 +42,22 @@ class FlashCardRevisionViewModel @Inject constructor(
     }
 
     fun showNextFlashCard() {
-        if (flashCards.isNotEmpty()) {
-            currentIndex = (flashCards.indices - currentIndex).randomOrNull()
-            _state.value =
-                FlashCardRevisionUiState.Success(flashCards[currentIndex ?: 0], showAnswer = false)
-        } else {
+        if (flashCards.isEmpty()) {
             _state.value = FlashCardRevisionUiState.Empty
+            return
+        }
+        if (seenIndices.size == flashCards.size) {
+            seenIndices.clear()
+            flashCards = flashCards.shuffled()
+        }
+
+        val availableIndices = flashCards.indices.filterNot { it in seenIndices }
+        val nextIndex = availableIndices.randomOrNull()
+        if (nextIndex != null) {
+            seenIndices.add(nextIndex)
+            currentIndex = nextIndex
+            _state.value =
+                FlashCardRevisionUiState.Success(flashCards[nextIndex], showAnswer = false)
         }
     }
 

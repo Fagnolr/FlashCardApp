@@ -3,7 +3,6 @@ package com.example.navigation.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -16,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -66,16 +64,11 @@ fun BottomNavigationBar(
                 label = {
                     Text(
                         item.title,
-                        color = if (index == selectedItem) {
-                            Color.White
-                        } else {
-                            MaterialTheme.colorScheme.onSecondary
-                        },
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.surface,
-                    indicatorColor = Color.Green,
+                    indicatorColor = MaterialTheme.colorScheme.primary,
                 ),
             )
         }

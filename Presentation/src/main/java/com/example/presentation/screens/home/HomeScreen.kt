@@ -54,7 +54,14 @@ fun HomeContent(
 ) {
     when (state) {
         is HomeScreenUiState.Loading -> {
-            CircularProgressIndicator(modifier = Modifier.padding(top = 8.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .then(modifier),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
         }
 
         is HomeScreenUiState.Success -> {
@@ -62,7 +69,14 @@ fun HomeContent(
         }
 
         is HomeScreenUiState.Error -> {
-            Text(stringResource(R.string.error_with_argument, state.message))
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .then(modifier),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(stringResource(R.string.error_with_argument, state.message))
+            }
         }
     }
 }
